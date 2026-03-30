@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './index.css';
 import Navbar from './component/layout/Navbar';
 import { Routes, Route } from "react-router-dom";
 import Home from './component/pages/Home.jsx';
@@ -8,6 +8,7 @@ import Service from './component/pages/Service.jsx';
 import Contact from './component/pages/Contact.jsx';
 import Login from './component/auth/Login.jsx';
 import Signup from './component/auth/Signup.jsx'
+import Footer from './component/layout/Footer.jsx';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />
       </Routes>
+      <Footer/>
     </>
   )
 }
