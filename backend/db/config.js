@@ -7,13 +7,18 @@ dotenv.config({
 });
 
 
-const connectDB = async()=>{{
-    try {
-        await mongoose.connect(process.env.MONGO_URL)
-        console.log("MongoDB connection successfully");
-    } catch (error) {
-        console.log("MongoDB connection error", error);
-    }
-}}  
+const connectDB = async () => {
+  if (mongoose.connections[0].readyState) {
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("MongoDB Connected");
+  } catch (err) {
+    console.error("DB Error:", err);
+    throw err;
+  }
+};
 
 export default connectDB;
