@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -6,20 +6,14 @@ dotenv.config({
   path: path.resolve('backend/.env')
 });
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-});
 
-db.connect((err) => {
-    if (err) {
-        console.error('DB Connection Error:', err);
-    } else {
-        console.log('MySQL Connected...');
+const connectDB = async()=>{{
+    try {
+        await mongoose.connect(process.env.MONGO_URL)
+        console.log("MongoDB connection successfully");
+    } catch (error) {
+        console.log("MongoDB connection error", error);
     }
-});
+}}  
 
-export default db;
+export default connectDB;
